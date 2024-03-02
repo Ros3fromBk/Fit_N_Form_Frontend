@@ -3,16 +3,29 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "../Components/Home";
+import NavBar from "./Components/Navbar";
+import Home from "../Pages/Home";
 function App() {
   // const [count, setCount] = useState(0)
-  const apiKey = import.meta.env.VITE_API_KEY
+  // const apiKey = import.meta.env.VITE_API_KEY
 
   return (
-    <>
+    <div>
+
       <Home />
-      <Navbar />
-    </>
+      <NavBar>
+       
+        <Routes>
+          
+          <Route path="/" element={<p>Main/Home</p>}>
+
+          </Route>
+        </Routes>
+
+      </NavBar>
+      </div>
+
+
     // <>
     //   <div>
     //     <a href="https://vitejs.dev" target="_blank">

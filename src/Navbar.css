@@ -1,0 +1,16 @@
+.nav-item{
+    list-style-type: none;
+    padding:10px;
+  }
+  header{
+  display:flex;
+  padding-left: 10px;
+  
+  }
+
+  .nav-link:hover {
+    
+    font-weight: bolder;
+   }
+   
+ 

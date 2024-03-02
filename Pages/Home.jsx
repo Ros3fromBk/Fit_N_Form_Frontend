@@ -4,7 +4,8 @@ const Home = ({  }) => {
     return (
         <Container className="Welcome message">
             <h1>
-                Welcome 
+                        Welcome To Fit💪🏾﹠Form🏋🏽
+ 
             </h1>
         </Container>
     );

@@ -1,19 +1,24 @@
+import "../NavBar.css"
+import React from 'react';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {
     return (
+        <header>
+
         <Navbar>
             <Container>
                 <Navbar.Brand>
-                    <Nav.Link as={Link} to="/">Excercises </Nav.Link>
+                    <Nav.Link as={Link} to="/">Log in </Nav.Link>
                 </Navbar.Brand>
-                {/* <Nav className='ms-auto'>
-                    <Nav.Link as={Link} to="/login">Log in</Nav.Link>
-                    <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
-                </Nav> */}
+                <Nav className='ms-auto'>
+                    <Nav.Link as={Link} to="/login">Excercises</Nav.Link>
+                </Nav>
             </Container>
         </Navbar>
+        </header>
+
     );
 };
 
