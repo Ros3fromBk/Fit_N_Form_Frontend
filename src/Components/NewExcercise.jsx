@@ -12,76 +12,80 @@ function NewExcercise() {
   });
   const api = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
-const {id} = useParams()
-  const handleTextInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  const { id } = useParams();
 
-    setForm((currentState) => ({
-      ...currentState,
-      [name]: value,
-    }));
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    axios
-      .post(`${api}/excercises`, form)
-      .then((response) => {
-        navigate(`/excercises/${id}`);
-      })
-      .catch((error) => console.log(error));
-  };
+    const handleTextInput = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h3>Let's Workout</h3>
-        <label>Excercise Name: </label>
-        <input
-          name="name"
-          type="text"
-          onChange={(e) => {
-            handleTextInput(e);
-          }}
-          value={form.name}
-          required
-        />
-        <br />
+      setForm((currentState) => ({
+        ...currentState,
+        [name]: value,
+      }));
+    };
 
-        <label>
-          Added to Routine:
-          <input name="added_to_routine" type="checkbox" />
-        </label>
-        <br />
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      axios
+        .post(`${api}/excercises`, form)
+        .then((res) => {
+          console.log(res)
+          navigate(`/exercises/${res.data.excercise_id}`);
+        })
+        .catch((error) => console.log(error));
+    };
 
-        <label className="text-area">Targeted Muscle(s): </label>
-        <textarea
-          name="targeted_muscles"
-          type="text"
-          placeholder="Biceps, Gluteus maximus"
-          onChange={(e) => {
-            handleTextInput(e);
-          }}
-          value={form.targeted_muscles}
-          required
-        />
-        <br />
-        <label>Body Parts: </label>
-        <input
-          name="body_parts"
-          type="text"
-          placeholder="Legs, Arms"
-          onChange={(e) => {
-            handleTextInput(e);
-          }}
-          value={form.body_parts}
-          required
-        />
-        <button>Get to work</button>
-      </form>
-    </>
-  );
-}
+    return (
+      <>
+        <form onSubmit={(e)=>handleSubmit(e)}>
+          <h3>Let's Workout</h3>
+          <label>Excercise Name: </label>
+          <input
+            name="name"
+            type="text"
+            onChange={(e) => {
+              handleTextInput(e);
+            }}
+            value={form.name}
+            required
+          />
+          <br />
+
+          <label>
+            Added to Routine:
+            <input name="added_to_routine" type="checkbox" />
+          </label>
+          <br />
+
+          <label className="text-area">Targeted Muscle(s): </label>
+          <textarea
+            name="targeted_muscles"
+            type="text"
+            placeholder="Biceps, Gluteus maximus"
+            onChange={(e) => {
+              handleTextInput(e);
+            }}
+            value={form.targeted_muscles}
+            required
+          />
+          <br />
+          <label>Body Parts: </label>
+          <input
+            name="body_parts"
+            type="text"
+            placeholder="Legs, Arms"
+            onChange={(e) => {
+              handleTextInput(e);
+            }}
+            value={form.body_parts}
+            required
+          />
+          <button>Get to work</button>
+        </form>
+      </>
+    );
+  }
+
 
 export default NewExcercise;

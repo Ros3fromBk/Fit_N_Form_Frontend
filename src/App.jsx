@@ -20,8 +20,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/newroutine" element={<NewExcercise />} />
-        <Route path="/exercises" element={<Excercises />} />
-        <Route path="/exercises/:id" element={<ShowPage />} />
+        <Route path="/excercises" element={<Excercises />} />
+        <Route path="/excercises/:id" element={<ShowPage />} />
+        <Route path ="/excercises/:id/editform/" element= {<EditExcercise/>}/> 
         {/* <Route path="*" err/> */}
       </Routes>
     </div>

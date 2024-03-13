@@ -1,49 +1,54 @@
 import axios from "axios";
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
+import NewExcercise from "./NewExcercise";
 
+const api = import.meta.env.VITE_BASE_URL;
+const EditExcercise = (e) => {
+  const navigate = useNavigate();
 
+  const [excercise, setExcercise] = useState({
+    name: "",
+    added_to_routine: false,
+    targeted_muscles: "",
+    body_parts: "",
+  });
+  const { id } = useParams();
 
-  const api = import.meta.env.VITE_BASE_URL;
-  const EditExcercise = (e)=>{
-    const navigate = useNavigate()
+  const handleTextInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-  const [excercise, setExcercise] = useState({name: "", added_to_routine: false,
-  targeted_muscles: "",
-  body_parts: "" })
+    setExcercise((currentState) => ({
+      ...currentState,
+      [name]: value,
+    }));
+  };
+  useEffect(() => {
+    axios
+      .get(`${api}/excercises/${id}`)
+      .then((response) => setExcercise(response.data))
+      .catch((error) => console.log(error));
+  }, [id]);
+  console.log(id);
 
-  // useEffect(() => {
-  //   const id= 
-  //       axios
-  //         .get(`${api}/excercises/${id}`)
-  //         .then((response) => setExcercise(response.body.id))
-  //         .catch((error) => console.log(error));
-  //     }, [id]);
-  
-    
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
       .put(`${api}/excercises/${id}`, excercise)
       .then((response) => {
+        console.log(response);
         navigate(`/excercises/${id}`);
       })
       .catch((error) => console.log(error));
   };
 
-    const handleDelete = () => {
-        axios
-        .delete(`${api}/excercises/${id}`)
-          .then((res) => {
-            navigate(`/excercises`)
-          })
-          .catch((err) => console.log(err));
-      };
+  return (
+    <>
+      {/* <NewExcercise /> */}
 
-    return (
-        <>
-          <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h3>Let's Workout</h3>
         <label>Excercise Name: </label>
         <input
@@ -88,11 +93,8 @@ import { useState , useEffect} from "react";
         />
         <button>Get to work</button>
       </form>
-        </>
-    )
-}
+    </>
+  );
+};
 
-
-
-
-  export default EditExcercise 
+export default EditExcercise;
